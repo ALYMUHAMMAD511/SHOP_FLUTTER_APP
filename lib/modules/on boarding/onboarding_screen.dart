@@ -54,18 +54,12 @@ class _OnboardingScreenState extends State<OnboardingScreen>
       appBar: AppBar(
         actions:
         [
-          TextButton(
+          defaultTextButton(
               onPressed: ()
               {
                 navigateAndFinish(context, const LoginScreen());
               },
-              child: const Text(
-                  'SKIP',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              text: 'SKIP',
           ),
         ],
       ),

@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:shop_app/shared/styles/colors.dart';
 
 Widget mySeparator() => Padding(
   padding: const EdgeInsetsDirectional.only(start: 20.0),
@@ -11,29 +12,66 @@ Widget mySeparator() => Padding(
 );
 
 Widget defaultFormField({
-  required TextEditingController controller,
-  TextInputType? type,
-  bool isPassword = false,
-  VoidCallback? onTap,
-  void Function(String)? onChange,
-  final FormFieldValidator<String>? validate,
-  required String labelText,
-  required IconData? prefixIcon,
-  IconData? suffixIcon,
-}) => TextFormField(
-  controller: controller,
-  keyboardType: type,
-  obscureText: isPassword,
-  onChanged: onChange,
-  onTap: onTap,
-  validator: validate,
-  decoration: InputDecoration(
-    border: const OutlineInputBorder(),
-    labelText: labelText,
-    prefixIcon: Icon(prefixIcon),
-    suffixIcon: Icon(suffixIcon),
+      required TextEditingController? controller,
+      TextInputType? type,
+      bool isPassword = false,
+      required String? labelText,
+      required IconData? prefixIcon,
+      IconData? suffixIcon,
+      final FormFieldValidator<String>? validate,
+      VoidCallback? suffixPressed,
+      VoidCallback? onTap,
+      bool isClickable = true,
+      ValueChanged<String>? onFieldSubmitted}) => TextFormField(
+      controller: controller,
+      keyboardType: type,
+      obscureText: isPassword,
+      decoration: InputDecoration(
+        labelText: labelText,
+        prefixIcon: Icon(prefixIcon),
+        suffixIcon: IconButton(onPressed: suffixPressed, icon: Icon(suffixIcon)),
+        border: const OutlineInputBorder(),
+      ),
+      onFieldSubmitted: onFieldSubmitted,
+      validator: validate,
+      onTap: onTap,
+      enabled: isClickable,
+    );
+
+Widget defaultButton({
+  double width = double.infinity,
+  Color background = defaultColor,
+  double radius = 3.0,
+  required VoidCallback? onPressed,
+  required String text,
+  bool isUpperCase = true,
+}) => Container(
+  width: width,
+  height: 50.0,
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(radius),
+    color: background,
   ),
+  child: MaterialButton(
+    onPressed: onPressed,
+    child: Text(
+      isUpperCase ? text.toUpperCase() : text,
+      style: const TextStyle(
+        color: Colors.white,
+          ),
+        ),
+      ),
 );
+
+Widget defaultTextButton({
+  required VoidCallback onPressed,
+  required String text,
+}) => TextButton(
+      onPressed: onPressed,
+      child: Text(
+        text.toUpperCase(),
+      ),
+    );
 
 void navigateTo(context, widget) => Navigator.push(
       context,
