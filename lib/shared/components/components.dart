@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:shop_app/shared/styles/colors.dart';
 
@@ -86,3 +85,4 @@ void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
   ),
       (Route<dynamic> route) => false,
 );
+

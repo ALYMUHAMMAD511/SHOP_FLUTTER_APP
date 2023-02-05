@@ -1,10 +1,13 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/modules/login/cubit/cubit.dart';
 import 'package:shop_app/modules/login/cubit/states.dart';
 import 'package:shop_app/modules/register/register_screen.dart';
 import 'package:shop_app/shared/components/components.dart';
+import 'package:toast/toast.dart';
+
 
 // ignore: must_be_immutable
 class LoginScreen extends StatelessWidget
@@ -15,6 +18,7 @@ class LoginScreen extends StatelessWidget
   @override
   Widget build(BuildContext context)
   {
+    ToastContext().init(context);
     var emailController = TextEditingController();
     var passwordController = TextEditingController();
 
@@ -22,7 +26,29 @@ class LoginScreen extends StatelessWidget
     return BlocProvider(
       create: (BuildContext context) => LoginCubit(),
       child: BlocConsumer <LoginCubit, LoginStates>(
-        listener: (context, state) {},
+        listener: (context, state)
+        {
+          if (state is LoginSuccessState)
+            {
+              if (state.loginModel.status)
+              {
+                if (kDebugMode)
+                {
+                  print(state.loginModel.message);
+                  print(state.loginModel.data!.token);
+                }
+                Toast.show(state.loginModel.message, duration: Toast.lengthLong, gravity:  Toast.bottom);
+              }
+              else
+                {
+                  if (kDebugMode)
+                  {
+                    print(state.loginModel.message);
+                  }
+                  Toast.show(state.loginModel.message, duration: Toast.lengthLong, gravity:  Toast.bottom);
+                }
+            }
+        },
         builder: (context, state) => Scaffold(
           appBar: AppBar(),
           body: Center(
