@@ -57,7 +57,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
           defaultTextButton(
               onPressed: ()
               {
-                navigateAndFinish(context, const LoginScreen());
+                navigateAndFinish(context, LoginScreen());
               },
               text: 'SKIP',
           ),
@@ -125,7 +125,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                   {
                     if (isLast)
                     {
-                      navigateAndFinish(context, const LoginScreen());
+                      navigateAndFinish(context, LoginScreen());
                     }
                     else
                       {
