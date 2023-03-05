@@ -83,6 +83,4 @@ void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
   MaterialPageRoute(
     builder: (context) => widget,
   ),
-      (Route<dynamic> route) => false,
-);
-
+      (Route<dynamic> route) => false);

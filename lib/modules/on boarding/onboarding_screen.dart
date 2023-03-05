@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_app/modules/login/login_screen.dart';
 import 'package:shop_app/shared/components/components.dart';
+import 'package:shop_app/shared/network/local/cache_helper.dart';
 import 'package:shop_app/shared/styles/colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -48,6 +49,17 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     ),
   ];
 
+  void submit() {
+    CacheHelper.saveData(
+      key: 'onBoarding',
+      value: true,
+    );
+    navigateAndFinish(
+      context,
+      LoginScreen(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -57,7 +69,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
           defaultTextButton(
               onPressed: ()
               {
-                navigateAndFinish(context, LoginScreen());
+                submit();
               },
               text: 'SKIP',
           ),
@@ -125,7 +137,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                   {
                     if (isLast)
                     {
-                      navigateAndFinish(context, LoginScreen());
+                      submit();
                     }
                     else
                       {

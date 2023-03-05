@@ -2,10 +2,12 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/layout/shop_layout.dart';
 import 'package:shop_app/modules/login/cubit/cubit.dart';
 import 'package:shop_app/modules/login/cubit/states.dart';
 import 'package:shop_app/modules/register/register_screen.dart';
 import 'package:shop_app/shared/components/components.dart';
+import 'package:shop_app/shared/network/local/cache_helper.dart';
 import 'package:toast/toast.dart';
 
 
@@ -32,6 +34,10 @@ class LoginScreen extends StatelessWidget
             {
               if (state.loginModel.status)
               {
+                CacheHelper.saveData(key: 'token', value: state.loginModel.data!.token).then((value)
+                {
+                  navigateAndFinish(context, const ShopLayout());
+                });
                 if (kDebugMode)
                 {
                   print(state.loginModel.message);
