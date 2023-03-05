@@ -45,7 +45,7 @@ dependencies:
   hexcolor: ^3.0.1
   shared_preferences: ^2.0.15
   webview_flutter: ^2.0.3
-  smooth_page_indicator: ^0.2.0
+  smooth_page_indicator: ^1.0.1
   toast: ^0.3.0
 
 

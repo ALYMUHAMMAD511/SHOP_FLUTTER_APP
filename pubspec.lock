@@ -329,10 +329,10 @@ packages:
     dependency: "direct main"
     description:
       name: smooth_page_indicator
-      sha256: a8b6838c7b1329788ee20db66a6b20fe5eb2d5946977a1143ccb872ddb9c96b8
+      sha256: "8c301bc686892306cd41672c1880167f140c16be305d5ede8201fefd9fcda829"
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.3"
+    version: "1.0.1"
   source_span:
     dependency: transitive
     description:
@@ -478,5 +478,5 @@ packages:
     source: hosted
     version: "0.2.0+3"
 sdks:
-  dart: ">=2.18.2 <3.0.0"
+  dart: ">=2.18.2 <4.0.0"
   flutter: ">=3.3.0"
