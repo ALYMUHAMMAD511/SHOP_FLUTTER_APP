@@ -1,12 +1,16 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/cubit/states.dart';
 import 'package:shop_app/layout/shop_layout.dart';
 import 'package:shop_app/modules/login/login_screen.dart';
 import 'package:shop_app/shared/bloc_observer.dart';
+import 'package:shop_app/shared/components/constants.dart';
 import 'package:shop_app/shared/network/local/cache_helper.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
 import 'package:shop_app/shared/styles/themes.dart';
+import 'cubit/cubit.dart';
 import 'modules/on boarding/onboarding_screen.dart';
 
 void main()
@@ -16,7 +20,7 @@ async {
   DioHelper.init();
   await CacheHelper.init();
   late Widget widget;
-  String? token = CacheHelper.getData(key: 'token');
+  token = CacheHelper.getData(key: 'token');
   bool? onBoarding = CacheHelper.getData(key: 'onBoarding');
   if (kDebugMode)
   {
@@ -42,18 +46,31 @@ async {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key, required this.startWidget});
+  MyApp({ required this.startWidget});
   late final Widget startWidget;
-
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: lightTheme,
-      darkTheme: darkTheme,
-      // themeMode: LoginCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
-      home: startWidget,
+    return BlocProvider(
+      create: (context) => ShopCubit(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => ShopCubit()..getHomeData(),
+          ),
+        ],
+        child: BlocConsumer<ShopCubit, ShopStates>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            return MaterialApp(
+              theme: lightTheme,
+              darkTheme: darkTheme,
+              debugShowCheckedModeBanner: false,
+              home: startWidget,
+              // onBoarding ? LoginScreen() : OnBoarding(),
+            );
+          },
+        ),
+      ),
     );
   }
 }
