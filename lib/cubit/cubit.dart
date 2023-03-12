@@ -43,7 +43,7 @@ class ShopCubit extends Cubit <ShopStates>
       homeModel = HomeModel.fromJson(value.data);
       if (kDebugMode)
       {
-        print(homeModel?.data?.banners?[12].image);
+        print(homeModel?.data?.banners?[0].image);
         print(homeModel?.status);
       }
       emit(ShopSuccessHomeDataState());
