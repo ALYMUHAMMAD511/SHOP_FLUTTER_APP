@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/cubit/cubit.dart';
 import 'package:shop_app/cubit/states.dart';
+import 'package:shop_app/models/categories_model.dart';
 import 'package:shop_app/models/home_model.dart';
+import 'package:shop_app/shared/components/components.dart';
 import 'package:shop_app/shared/styles/colors.dart';
 
 class ProductsScreen extends StatelessWidget {
@@ -18,39 +20,85 @@ class ProductsScreen extends StatelessWidget {
         builder: (context, state)
         {
           return ConditionalBuilder(
-            condition: ShopCubit.get(context).homeModel != null,
-            builder: (context) => productsBuilder(ShopCubit.get(context).homeModel!),
+            condition: ShopCubit.get(context).homeModel != null && ShopCubit.get(context).categoriesModel != null,
+            builder: (context) => productsBuilder(ShopCubit.get(context).homeModel!, ShopCubit.get(context).categoriesModel!),
             fallback: (context) => const Center(child: CircularProgressIndicator()),
           );
         }
         );
   }
 
-  Widget productsBuilder(HomeModel model) => SingleChildScrollView(
+
+  Widget productsBuilder(HomeModel model, CategoriesModel categoriesModel) => SingleChildScrollView(
     physics: const BouncingScrollPhysics(),
     child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CarouselSlider(
-            items: model.data!.banners.map((e) => Image(
-              image: NetworkImage(e.image),
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),).toList(),
-            options: CarouselOptions(
-              height: 250.0,
-              initialPage: 0,
-              viewportFraction: 1.0,
-              enableInfiniteScroll: true,
-              reverse: false,
-              autoPlay: true,
-              autoPlayInterval: const Duration(seconds: 3),
-              autoPlayAnimationDuration: const Duration(seconds: 1),
-              autoPlayCurve: Curves.fastOutSlowIn,
-              scrollDirection: Axis.horizontal,
-            ),
+          items: model.data!.banners.map((e) => Image(
+            image: NetworkImage(e.image),
+            width: double.infinity,
+            fit: BoxFit.cover,
+          ),).toList(),
+          options: CarouselOptions(
+            height: 250.0,
+            initialPage: 0,
+            viewportFraction: 1.0,
+            enableInfiniteScroll: true,
+            reverse: false,
+            autoPlay: true,
+            autoPlayInterval: const Duration(seconds: 3),
+            autoPlayAnimationDuration: const Duration(seconds: 1),
+            autoPlayCurve: Curves.fastOutSlowIn,
+            scrollDirection: Axis.horizontal,
+          ),
         ),
         const SizedBox(
-          height: 12.0,
+          height: 20.0,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Categories',
+                style: TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
+              Container(
+                height: 100.0,
+                child: ListView.separated(
+                  itemBuilder: (context, index) => buildCategoryItem(categoriesModel.data.data[index]),
+                  separatorBuilder: (context, index) => const SizedBox(
+                      width: 10.0,
+                    ),
+                  itemCount: categoriesModel.data.data.length,
+                  physics: const BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                ),
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
+              const Text(
+                'New Products',
+                style: TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 20.0,
         ),
         Container(
           color: Colors.grey[300],
@@ -68,7 +116,7 @@ class ProductsScreen extends StatelessWidget {
 
           ),
         ),
-
+        const SizedBox()
       ],
     ),
   );
@@ -88,16 +136,16 @@ class ProductsScreen extends StatelessWidget {
             ),
             if(model.discount != 0)
               Container(
-              padding: const EdgeInsets.symmetric(horizontal: 6.0),
-              color: Colors.red,
-              child: const Text(
-                'DISCOUNT',
-                style: TextStyle(
-                  fontSize: 9.0,
-                  color: Colors.white
+                padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                color: Colors.red,
+                child: const Text(
+                  'DISCOUNT',
+                  style: TextStyle(
+                      fontSize: 9.0,
+                      color: Colors.white
+                  ),
                 ),
               ),
-            ),
           ],
         ),
         Padding(
@@ -119,8 +167,8 @@ class ProductsScreen extends StatelessWidget {
                   Text(
                     '${model.price.round()}',
                     style: const TextStyle(
-                      fontSize: 13.0,
-                      color: defaultColor
+                        fontSize: 13.0,
+                        color: defaultColor
                     ),
                   ),
                   const SizedBox(
@@ -128,21 +176,21 @@ class ProductsScreen extends StatelessWidget {
                   ),
                   if(model.discount != 0)
                     Text(
-                    '${model.oldPrice.round()}',
-                    style: const TextStyle(
-                      fontSize: 11.0,
-                      color: Colors.grey,
-                      decoration: TextDecoration.lineThrough,
+                      '${model.oldPrice.round()}',
+                      style: const TextStyle(
+                        fontSize: 11.0,
+                        color: Colors.grey,
+                        decoration: TextDecoration.lineThrough,
+                      ),
                     ),
-                  ),
                   const Spacer(),
                   IconButton(
                     padding: EdgeInsets.zero,
                     onPressed: (){},
                     icon: const Icon(
-                        Icons.favorite_border,
-                        size: 15.0,
-                      ),
+                      Icons.favorite_border,
+                      size: 15.0,
+                    ),
                   ),
                 ],
               ),
@@ -151,5 +199,32 @@ class ProductsScreen extends StatelessWidget {
         ),
       ],
     ),
+  );
+
+  Widget buildCategoryItem(DataModel model) => Stack(
+    alignment: AlignmentDirectional.bottomCenter,
+    children:  [
+       Image(
+        image: NetworkImage("${model.image}"),
+        width: 100.0,
+        height: 100.0,
+        fit: BoxFit.cover,
+      ),
+      Container(
+        color: Colors.black.withOpacity(0.8),
+        width: 100.0,
+        child: Text(
+          capitalizeAllWord('${model.name}'),
+          textAlign: TextAlign.center,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+
+          style: const TextStyle(
+            color: Colors.white,
+
+          ),
+        ),
+      ),
+    ],
   );
 }
