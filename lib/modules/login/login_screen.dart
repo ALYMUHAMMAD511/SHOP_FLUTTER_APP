@@ -44,7 +44,7 @@ class LoginScreen extends StatelessWidget
                   print(state.loginModel.message);
                   print(state.loginModel.data!.token);
                 }
-                Toast.show(state.loginModel.message, duration: Toast.lengthLong, gravity:  Toast.bottom);
+                Toast.show(state.loginModel.message, duration: Toast.lengthLong, gravity:  Toast.bottom, backgroundColor: Colors.green);
               }
               else
                 {
@@ -52,7 +52,7 @@ class LoginScreen extends StatelessWidget
                   {
                     print(state.loginModel.message);
                   }
-                  Toast.show(state.loginModel.message, duration: Toast.lengthLong, gravity:  Toast.bottom);
+                  Toast.show(state.loginModel.message, duration: Toast.lengthLong, gravity:  Toast.bottom, backgroundColor: Colors.red);
                 }
             }
         },

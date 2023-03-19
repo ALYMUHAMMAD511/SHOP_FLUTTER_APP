@@ -21,6 +21,10 @@ async {
   await CacheHelper.init();
   late Widget widget;
   token = CacheHelper.getData(key: 'token');
+  if (kDebugMode)
+  {
+    print(token);
+  }
   bool? onBoarding = CacheHelper.getData(key: 'onBoarding');
   if (kDebugMode)
   {
@@ -55,7 +59,7 @@ class MyApp extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => ShopCubit()..getHomeData()..getCategories(),
+            create: (context) => ShopCubit()..getHomeData()..getCategories()..getFavorites(),
           ),
         ],
         child: BlocConsumer<ShopCubit, ShopStates>(
