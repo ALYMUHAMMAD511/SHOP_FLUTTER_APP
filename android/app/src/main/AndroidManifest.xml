@@ -2,8 +2,8 @@
     package="com.example.shop_app">
    <application
         android:label="Matjarrak"
-        android:name="Matjarrak"
-        android:icon="@mipmap/ic_launcher">
+        android:name="${applicationName}"
+        android:icon="@mipmap/shopping-bag.png">
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -49,11 +49,14 @@ dependencies:
   toast: ^0.3.0
   carousel_slider: ^4.2.1
 
-
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  image_path: assets/icons/shopping-bag.png
+  android: true
+  ios: true
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
