@@ -17,14 +17,13 @@ class LoginScreen extends StatelessWidget
 {
   LoginScreen({super.key});
   var formKey = GlobalKey <FormState> ();
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context)
   {
     ToastContext().init(context);
-    var emailController = TextEditingController();
-    var passwordController = TextEditingController();
-
 
     return BlocProvider(
 
@@ -166,7 +165,7 @@ class LoginScreen extends StatelessWidget
                           defaultTextButton(
                             onPressed: ()
                             {
-                              navigateTo(context, const RegisterScreen());
+                              navigateTo(context, RegisterScreen());
                             },
                             text: 'register',
                           ),

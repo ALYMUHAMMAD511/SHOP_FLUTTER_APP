@@ -64,7 +64,7 @@ class SettingsScreen extends StatelessWidget
                         }
                         return null;
                       },
-                      labelText: 'Email',
+                      labelText: 'Email Address',
                       prefixIcon: Icons.email,
                     ),
                     const SizedBox(
