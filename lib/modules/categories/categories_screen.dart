@@ -43,7 +43,7 @@ class CategoriesScreen extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 20,
+              fontSize: 18.8,
             ),
           ),
           const Spacer(),
