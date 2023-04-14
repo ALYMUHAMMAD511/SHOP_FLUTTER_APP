@@ -3,7 +3,7 @@
    <application
         android:label="Matjarrak"
         android:name="${applicationName}"
-        android:icon="@mipmap/shopping-bag.png">
+        android:icon="@mipmap/shopping_bag_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"
