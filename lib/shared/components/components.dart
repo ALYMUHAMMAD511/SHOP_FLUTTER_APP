@@ -99,7 +99,7 @@ String capitalizeAllWord(String value) {
   return result;
 }
 
-Widget buildListProduct(
+Widget buildProductItems(
     model,
     context, {
       bool isOldPrice = true,

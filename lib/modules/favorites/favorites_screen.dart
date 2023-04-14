@@ -19,7 +19,7 @@ class FavoritesScreen extends StatelessWidget
         return ConditionalBuilder(
           condition: state is! ShopLoadingGetFavoritesState,
           builder: (context) => ListView.separated(
-            itemBuilder: (context, index) => buildListProduct(ShopCubit.get(context).favoritesModel!.data!.data![index].product, context),
+            itemBuilder: (context, index) => buildProductItems(ShopCubit.get(context).favoritesModel!.data!.data![index].product, context),
             separatorBuilder: (context, index) => mySeparator(),
             itemCount: ShopCubit.get(context).favoritesModel!.data!.data!.length,
           ),
