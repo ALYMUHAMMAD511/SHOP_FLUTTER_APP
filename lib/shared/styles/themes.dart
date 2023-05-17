@@ -33,13 +33,26 @@ ThemeData darkTheme = ThemeData(
     backgroundColor: HexColor('333739'),
   ),
   textTheme: const TextTheme(
-    bodyText1 : TextStyle(
+    headlineMedium : TextStyle(
+      color: Colors.white,
+    ),
+    bodyLarge : TextStyle(
+      fontSize: 25.0,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
+    ),
+    bodyMedium: TextStyle(
       fontSize: 18.0,
       fontWeight: FontWeight.bold,
       color: Colors.white,
     ),
+    bodySmall: TextStyle(
+      fontSize: 16.0,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
+    ),
   ),
-  fontFamily: 'Jannah'
+    fontFamily: 'Jannah'
 );
 ThemeData lightTheme = ThemeData(
   primarySwatch: defaultColor,
@@ -68,8 +81,21 @@ ThemeData lightTheme = ThemeData(
     elevation: 20.0,
   ),
   textTheme: const TextTheme(
-    bodyText1: TextStyle(
+    headlineMedium : TextStyle(
+      color: Colors.black,
+    ),
+    bodySmall: TextStyle(
+      fontSize: 16.0,
+      fontWeight: FontWeight.bold,
+      color: Colors.black,
+    ),
+    bodyMedium: TextStyle(
       fontSize: 18.0,
+      fontWeight: FontWeight.bold,
+      color: Colors.black,
+    ),
+    bodyLarge: TextStyle(
+      fontSize: 25.0,
       fontWeight: FontWeight.bold,
       color: Colors.black,
     ),

@@ -3,6 +3,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:shop_app/cubit/cubit.dart';
 import 'package:shop_app/cubit/states.dart';
 import 'package:shop_app/models/categories_model.dart';
@@ -73,12 +74,9 @@ class ProductsScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+                Text(
                 'Categories',
-                style: TextStyle(
-                  fontSize: 25.0,
-                  fontWeight: FontWeight.w800,
-                ),
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
               const SizedBox(
                 height: 20.0,
@@ -99,12 +97,9 @@ class ProductsScreen extends StatelessWidget {
               const SizedBox(
                 height: 20.0,
               ),
-              const Text(
+              Text(
                 'New Products',
-                style: TextStyle(
-                  fontSize: 25.0,
-                  fontWeight: FontWeight.w800,
-                ),
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
             ],
           ),
@@ -134,7 +129,7 @@ class ProductsScreen extends StatelessWidget {
   );
 
   Widget buildGridProduct(ProductModel model, context) => Container(
-    color: Colors.white,
+    color: ShopCubit.get(context).isDark ? HexColor('333739') : Colors.white,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

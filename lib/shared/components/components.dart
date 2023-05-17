@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/cubit/cubit.dart';
 import 'package:shop_app/shared/styles/colors.dart';
+import 'package:shop_app/shared/styles/themes.dart';
+
+
 
 Widget mySeparator() => Padding(
   padding: const EdgeInsetsDirectional.only(start: 20.0),
@@ -13,31 +16,33 @@ Widget mySeparator() => Padding(
 
 
 Widget defaultFormField({
-      required TextEditingController? controller,
-      TextInputType? type,
-      bool isPassword = false,
-      required String? labelText,
-      required IconData? prefixIcon,
-      IconData? suffixIcon,
-      final FormFieldValidator<String>? validate,
-      VoidCallback? suffixPressed,
-      VoidCallback? onTap,
-      bool isClickable = true,
-      ValueChanged<String>? onFieldSubmitted}) => TextFormField(
-      controller: controller,
-      keyboardType: type,
-      obscureText: isPassword,
-      decoration: InputDecoration(
-        labelText: labelText,
-        prefixIcon: Icon(prefixIcon),
-        suffixIcon: IconButton(onPressed: suffixPressed, icon: Icon(suffixIcon)),
-        border: const OutlineInputBorder(),
-      ),
-      onFieldSubmitted: onFieldSubmitted,
-      validator: validate,
-      onTap: onTap,
-      enabled: isClickable,
-    );
+  required TextEditingController? controller,
+  TextInputType? type,
+  bool isPassword = false,
+  required String? labelText,
+  required IconData? prefixIcon,
+  IconData? suffixIcon,
+  final FormFieldValidator<String>? validate,
+  VoidCallback? suffixPressed,
+  VoidCallback? onTap,
+  bool isClickable = true,
+  ValueChanged<String>? onFieldSubmitted}) => TextFormField(
+  controller: controller,
+  keyboardType: type,
+  obscureText: isPassword,
+  decoration: InputDecoration(
+    labelText: labelText,
+    labelStyle: TextStyle(
+      color: Colors.grey[300],),
+    prefixIcon: Icon(prefixIcon),
+    suffixIcon: IconButton(onPressed: suffixPressed, icon: Icon(suffixIcon)),
+    border: const OutlineInputBorder(),
+  ),
+  onFieldSubmitted: onFieldSubmitted,
+  validator: validate,
+  onTap: onTap,
+  enabled: isClickable,
+);
 
 Widget defaultButton({
   double width = double.infinity,

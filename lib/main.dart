@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,8 +19,8 @@ async {
   DioHelper.init();
   await CacheHelper.init();
   late Widget widget;
-  bool? isDark =  CacheHelper.getData(key: 'isDark') as bool? ?? false;
-  token = CacheHelper.getData(key: 'token');
+  bool defaultMode = false;
+  late bool? isDark =  CacheHelper.getBoolean(key: 'isDark');  token = CacheHelper.getData(key: 'token');
   if (kDebugMode)
   {
     print(token);
@@ -47,7 +46,7 @@ async {
     widget = const OnboardingScreen();
   }
 
-  runApp(MyApp(startWidget: widget, isDark: isDark,));
+  runApp(MyApp(startWidget: widget, isDark: isDark ?? defaultMode,));
 }
 
 class MyApp extends StatelessWidget {
@@ -61,10 +60,7 @@ class MyApp extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => ShopCubit()..getHomeData()..getCategories()..getFavorites()..getUserData(),
-          ),
-          BlocProvider(
-          create: (BuildContext context) => ShopCubit()..changeAppMode(fromShared: isDark)
+            create: (context) => ShopCubit()..getHomeData()..getCategories()..getFavorites()..getUserData()..changeThemeMode(fromShared: isDark),
           ),
         ],
         child: BlocConsumer<ShopCubit, ShopStates>(
