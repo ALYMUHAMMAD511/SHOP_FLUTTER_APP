@@ -20,6 +20,7 @@ async {
   DioHelper.init();
   await CacheHelper.init();
   late Widget widget;
+  bool? isDark =  CacheHelper.getData(key: 'isDark') as bool? ?? false;
   token = CacheHelper.getData(key: 'token');
   if (kDebugMode)
   {
@@ -46,12 +47,13 @@ async {
     widget = const OnboardingScreen();
   }
 
-  runApp(MyApp(startWidget: widget));
+  runApp(MyApp(startWidget: widget, isDark: isDark,));
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({ required this.startWidget});
+  MyApp({ required this.startWidget, required this.isDark});
   late final Widget startWidget;
+  final bool isDark;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -61,6 +63,9 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => ShopCubit()..getHomeData()..getCategories()..getFavorites()..getUserData(),
           ),
+          BlocProvider(
+          create: (BuildContext context) => ShopCubit()..changeAppMode(fromShared: isDark)
+          ),
         ],
         child: BlocConsumer<ShopCubit, ShopStates>(
           listener: (context, state) {},
@@ -68,6 +73,7 @@ class MyApp extends StatelessWidget {
             return MaterialApp(
               theme: lightTheme,
               darkTheme: darkTheme,
+              themeMode: ShopCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
               debugShowCheckedModeBanner: false,
               home: startWidget,
               // onBoarding ? LoginScreen() : OnBoarding(),

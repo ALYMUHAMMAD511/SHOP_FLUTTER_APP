@@ -12,6 +12,7 @@ import 'package:shop_app/modules/products/products_screen.dart';
 import 'package:shop_app/modules/settings/settings_screen.dart';
 import 'package:shop_app/shared/components/constants.dart';
 import 'package:shop_app/shared/network/end_points.dart';
+import 'package:shop_app/shared/network/local/cache_helper.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
 
 import '../models/favorites_model.dart';
@@ -209,5 +210,22 @@ class ShopCubit extends Cubit <ShopStates>
       }
       emit(ShopErrorUpdateUserState());
     });
+  }
+
+  late bool isDark = false;
+
+  void changeAppMode({required bool fromShared}) {
+    if (fromShared != null)
+    {
+      isDark = fromShared;
+      emit(AppChangeModeState());
+    }
+    else
+    {
+      isDark = !isDark;
+      CacheHelper.putBoolean(key: 'isDark', value: isDark).then((value) {
+        emit(AppChangeModeState());
+      });
+    }
   }
 }
