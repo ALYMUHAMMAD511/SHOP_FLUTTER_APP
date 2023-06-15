@@ -27,6 +27,7 @@ class SearchScreen extends StatelessWidget {
                 children:
                 [
                   defaultFormField(
+                    context,
                     controller: searchController,
                     type: TextInputType.text,
                     validate: (value)

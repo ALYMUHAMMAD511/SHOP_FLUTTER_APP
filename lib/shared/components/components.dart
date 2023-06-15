@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/cubit/cubit.dart';
 import 'package:shop_app/shared/styles/colors.dart';
-import 'package:shop_app/shared/styles/themes.dart';
-
-
 
 Widget mySeparator() => Padding(
   padding: const EdgeInsetsDirectional.only(start: 20.0),
@@ -15,7 +12,7 @@ Widget mySeparator() => Padding(
 );
 
 
-Widget defaultFormField({
+Widget defaultFormField(context,{
   required TextEditingController? controller,
   TextInputType? type,
   bool isPassword = false,
@@ -27,16 +24,29 @@ Widget defaultFormField({
   VoidCallback? onTap,
   bool isClickable = true,
   ValueChanged<String>? onFieldSubmitted}) => TextFormField(
+  style: TextStyle(
+    color: ShopCubit.get(context).isDark ? Colors.white : Colors.black,
+  ),
   controller: controller,
   keyboardType: type,
   obscureText: isPassword,
   decoration: InputDecoration(
     labelText: labelText,
     labelStyle: TextStyle(
-      color: Colors.grey[300],),
-    prefixIcon: Icon(prefixIcon),
-    suffixIcon: IconButton(onPressed: suffixPressed, icon: Icon(suffixIcon)),
-    border: const OutlineInputBorder(),
+      color:ShopCubit.get(context).isDark ? Colors.white: Colors.black,),
+    prefixIcon: Icon(
+      prefixIcon,
+      color: ShopCubit.get(context).isDark ? Colors.white70: Colors.black54,
+    ),
+    suffixIcon: IconButton(onPressed: suffixPressed,
+        icon: Icon(
+          suffixIcon,
+          color: ShopCubit.get(context).isDark ? Colors.white70: Colors.black54,
+        )
+    ),
+    border: OutlineInputBorder(
+      borderSide: BorderSide(color: ShopCubit.get(context).isDark ? Colors.white: Colors.black54,),
+    ),
   ),
   onFieldSubmitted: onFieldSubmitted,
   validator: validate,

@@ -19,4 +19,3 @@ class RegisterErrorState extends RegisterStates
 }
 
 class ChangeRegisterPasswordVisibilityState extends RegisterStates {}
-

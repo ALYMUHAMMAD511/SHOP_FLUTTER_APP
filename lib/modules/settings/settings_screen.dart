@@ -48,6 +48,7 @@ class SettingsScreen extends StatelessWidget
                         height: 20.0,
                       ),
                       defaultFormField(
+                        context,
                         controller: nameController,
                         type: TextInputType.name,
                         validate: (value) {
@@ -63,6 +64,7 @@ class SettingsScreen extends StatelessWidget
                         height: 20.0,
                       ),
                       defaultFormField(
+                        context,
                         controller: emailController,
                         type: TextInputType.emailAddress,
                         validate: (value) {
@@ -78,6 +80,7 @@ class SettingsScreen extends StatelessWidget
                         height: 20.0,
                       ),
                       defaultFormField(
+                        context,
                         controller: phoneController,
                         type: TextInputType.phone,
                         validate: (value) {

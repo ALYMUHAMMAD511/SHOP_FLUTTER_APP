@@ -2,6 +2,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/cubit/cubit.dart';
 import 'package:shop_app/modules/register/register_cubit/cubit.dart';
 import 'package:shop_app/modules/register/register_cubit/states.dart';
 import 'package:shop_app/shared/components/components.dart';
@@ -57,7 +58,9 @@ class RegisterScreen extends StatelessWidget {
           }
         },
         builder: (context, state) => Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(
+            title: const Text('Matjarrak'),
+          ),
           body: Center(
             child: SingleChildScrollView(
               child: Padding(
@@ -70,20 +73,19 @@ class RegisterScreen extends StatelessWidget {
                     [
                       Text(
                         'REGISTER',
-                        style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                          color: Colors.black,
-                        ),
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       Text(
                         'Register now to browse our hot offers',
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: Colors.grey
+                            color: ShopCubit.get(context).isDark ? Colors.white70 : Colors.grey,
                         ),
                       ),
                       const SizedBox(
                         height: 30.0,
                       ),
                       defaultFormField(
+                        context,
                         controller: nameController,
                         type: TextInputType.name,
                         validate: (String? value)
@@ -101,6 +103,7 @@ class RegisterScreen extends StatelessWidget {
                         height: 17.0,
                       ),
                       defaultFormField(
+                        context,
                         controller: emailController,
                         type: TextInputType.emailAddress,
                         validate: (String? value)
@@ -118,6 +121,7 @@ class RegisterScreen extends StatelessWidget {
                         height: 17.0,
                       ),
                       defaultFormField(
+                        context,
                         controller: passwordController,
                         type: TextInputType.visiblePassword,
                         suffixIcon: RegisterCubit.get(context).suffix,
@@ -142,6 +146,7 @@ class RegisterScreen extends StatelessWidget {
                         height: 17.0,
                       ),
                       defaultFormField(
+                        context,
                         controller: phoneController,
                         type: TextInputType.phone,
                         validate: (value)

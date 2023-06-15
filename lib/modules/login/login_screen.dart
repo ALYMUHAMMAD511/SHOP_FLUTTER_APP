@@ -2,6 +2,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/cubit/cubit.dart';
 import 'package:shop_app/layout/shop_layout.dart';
 import 'package:shop_app/modules/login/login_cubit/cubit.dart';
 import 'package:shop_app/modules/login/login_cubit/states.dart';
@@ -59,7 +60,9 @@ class LoginScreen extends StatelessWidget
             }
         },
         builder: (context, state) => Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(
+            title: const Text('Matjarrak'),
+          ),
           body: Center(
             child: SingleChildScrollView(
               child: Padding(
@@ -72,18 +75,19 @@ class LoginScreen extends StatelessWidget
                     [
                       Text(
                         'LOGIN',
-                        style: Theme.of(context).textTheme.headlineMedium
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       Text(
                         'Login now to browse our hot offers',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Colors.grey
+                            color: ShopCubit.get(context).isDark ? Colors.white70 : Colors.grey,
                         ),
                       ),
                       const SizedBox(
                         height: 30.0,
                       ),
                       defaultFormField(
+                        context,
                         controller: emailController,
                         type: TextInputType.emailAddress,
                         validate: (String? value)
@@ -101,6 +105,7 @@ class LoginScreen extends StatelessWidget
                         height: 17.0,
                       ),
                       defaultFormField(
+                        context,
                         controller: passwordController,
                         type: TextInputType.visiblePassword,
                         suffixIcon: LoginCubit.get(context).suffix,
