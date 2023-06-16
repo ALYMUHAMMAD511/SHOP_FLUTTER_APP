@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:shop_app/cubit/cubit.dart';
 import 'package:shop_app/modules/login/login_screen.dart';
 import 'package:shop_app/shared/components/components.dart';
 import 'package:shop_app/shared/network/local/cache_helper.dart';
@@ -63,6 +65,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+      backgroundColor: ShopCubit.get(context).isDark ? HexColor('333739') : Colors.white,
       appBar: AppBar(
         actions:
         [
@@ -173,14 +176,16 @@ class _OnboardingScreenState extends State<OnboardingScreen>
       ),
       Text(
         model.title,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 26.0,
+          color: ShopCubit.get(context).isDark ? Colors.white : Colors.black,
         ),
       ),
       Text(
         model.body,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 15.0,
+          color : ShopCubit.get(context).isDark ? Colors.white : Colors.black,
         ),
       ),
       const SizedBox(
