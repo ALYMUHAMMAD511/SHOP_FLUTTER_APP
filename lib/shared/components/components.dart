@@ -11,7 +11,6 @@ Widget mySeparator() => Padding(
   ),
 );
 
-
 Widget defaultFormField(context,{
   required TextEditingController? controller,
   TextInputType? type,
@@ -33,7 +32,7 @@ Widget defaultFormField(context,{
   decoration: InputDecoration(
     labelText: labelText,
     labelStyle: TextStyle(
-      color:ShopCubit.get(context).isDark ? Colors.white: Colors.black,),
+      color:ShopCubit.get(context).isDark ? Colors.white70: Colors.black54,),
     prefixIcon: Icon(
       prefixIcon,
       color: ShopCubit.get(context).isDark ? Colors.white70: Colors.black54,
